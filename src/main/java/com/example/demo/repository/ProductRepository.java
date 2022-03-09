@@ -12,6 +12,6 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
     //JPQL
     @Query
     List<ProductEntity> findByStockGreaterThan(long jumlah);
-//    List<ProductEntity> findByPriceLowerThan(long harga);
+    List<ProductEntity> findByStockGreaterThanAndPriceLessThanEqual(long jumlah, long harga);
 
 }

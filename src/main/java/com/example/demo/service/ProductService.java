@@ -39,10 +39,10 @@ public class ProductService {
         }else{
             if (isInStock){
                 //fetch all product with stock >0
-                return fetchMaxPrice(fetchAllInStock(), maxPrice);
+                return fetchMaxPrice(maxPrice);
             } else{
                 //fetch all
-                return fetchMaxPrice(fetchAll(), maxPrice);
+                return fetchMaxPrice(maxPrice);
             }
         }
 
@@ -58,10 +58,15 @@ public class ProductService {
         return productRepository.findByStockGreaterThan(0);
     }
 
-    public List<ProductEntity> fetchMaxPrice(List<ProductEntity> data, long harga){
-        //TODO: Return product in price range
-        return data.stream().filter(a -> a.getPrice() <= harga)
-                .collect(Collectors.toList());
+//    public List<ProductEntity> fetchMaxPrice(List<ProductEntity> data, long harga){
+//        //Return product in price range
+//        return data.stream().filter(a -> a.getPrice() <= harga)
+//                .collect(Collectors.toList());
+//    }
+
+    public List<ProductEntity> fetchMaxPrice(long harga){
+        //Return product in price range
+        return productRepository.findByStockGreaterThanAndPriceLessThanEqual(0, harga);
     }
 
     public void delete(long id){
